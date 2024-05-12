@@ -18,6 +18,7 @@ while True:
      elif event == 'Salvar':
           email = values['email']
           senha = values['senha']
+          break
 
 
 conexao = mysql.connector.connect(
@@ -30,11 +31,9 @@ conexao = mysql.connector.connect(
 
 cursor = conexao.cursor()
 
-comando = f'INSERT INTO emails (email) VALUES ("{email}")'
+comando = f'INSERT INTO emails (email) VALUES ("%S"); INSERT INTO senhas (senha) VALUES ("%S")'
 
-comando = f'INSERT INTO senhas (senha) VALUES ("{senha}")'
-
-cursor.execute(comando)
+cursor.execute(comando(email, senha))
 
 conexao.commit()
 
