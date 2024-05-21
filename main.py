@@ -31,8 +31,8 @@ conexao = mysql.connector.connect(
 
 cursor = conexao.cursor()
 
-cursor.execute(f'INSERT INTO emails (email) VALUES ("{email}")')
-cursor.execute(f'INSERT INTO senhas (senha) VALUES ("{senha}")')
+cursor.execute('INSERT INTO emails (email) VALUES (%s)', (email, ))
+cursor.execute('INSERT INTO senhas (senha) VALUES (%s)', (senha, ))
 
 conexao.commit()
 
